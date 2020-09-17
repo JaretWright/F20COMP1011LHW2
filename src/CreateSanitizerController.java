@@ -39,7 +39,7 @@ public class CreateSanitizerController implements Initializable {
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 100, 30);
         volumeSpinner.setValueFactory(valueFactory);
-        volumeSpinner.setEditable(false);
+        volumeSpinner.setEditable(true);
 
         //configure the slider
         alcoholSlider.setMin(30);
@@ -66,25 +66,40 @@ public class CreateSanitizerController implements Initializable {
 
     public void createObject()
     {
+        objectLabel.setText("");
         if (fieldsAreFull())
         {
-            HandCleaner hc = new HandCleaner(
+            try {
+                HandCleaner hc = new HandCleaner(
                         brandComboBox.getValue(),
                         volumeSpinner.getValue(),
                         alcoholSlider.getValue(),
                         Double.parseDouble(priceTextField.getText()));
 
-            objectLabel.setText(hc.toString());
+                objectLabel.setText(hc.toString());
+            } catch (IllegalArgumentException e)
+            {
+                objectLabel.setText(e.getMessage());
+            }
+
         }
     }
 
     public boolean fieldsAreFull()
     {
-        if (brandComboBox.getValue().isBlank())
+        if (brandComboBox.getValue() == null || brandComboBox.getValue().isBlank())
+        {
+            objectLabel.setText("You must select a Brand");
             return false;
+        }
+
 
         if (priceTextField.getText().isBlank())
+        {
+            objectLabel.setText("You must enter a price");
             return false;
+        }
+
 
         return true;
     }
