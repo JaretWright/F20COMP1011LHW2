@@ -1,9 +1,10 @@
 public class HandCleaner {
     private String brand;
-    private int quantity, quantityRemaining, alcoholPercentage;
+    private int quantity, quantityRemaining;
+    private double alcoholPercentage;
     private double price;
 
-    public HandCleaner(String brand, int quantity, int alcoholPercentage, double price) {
+    public HandCleaner(String brand, int quantity, double alcoholPercentage, double price) {
         setBrand(brand);
         setQuantity(quantity);
         setQuantityRemaining(quantity);
@@ -44,11 +45,11 @@ public class HandCleaner {
             throw new IllegalArgumentException("quantity remaining must be 0-"+quantity);
     }
 
-    public int getAlcoholPercentage() {
+    public double getAlcoholPercentage() {
         return alcoholPercentage;
     }
 
-    public void setAlcoholPercentage(int alcoholPercentage) {
+    public void setAlcoholPercentage(double alcoholPercentage) {
         if (alcoholPercentage>=40 && alcoholPercentage<=100)
             this.alcoholPercentage = alcoholPercentage;
         else
