@@ -3,6 +3,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +42,21 @@ public class CreateSanitizerController implements Initializable {
         volumeSpinner.setValueFactory(valueFactory);
         volumeSpinner.setEditable(true);
 
+        //try to capture the user input prior to commit
+        TextField editor = volumeSpinner.getEditor();
+        editor.textProperty().addListener((observable, ov, nv)->{
+            objectLabel.setText("");
+            try{
+                String text = editor.getText();
+                if (!text.isBlank())
+                    Integer.parseInt(editor.getText());
+            } catch (NumberFormatException e)
+            {
+                objectLabel.setTextFill(Color.RED);
+                objectLabel.setText("Volume must be a whole number.");
+            }
+        });
+
         //configure the slider
         alcoholSlider.setMin(30);
         alcoholSlider.setMax(100);
@@ -66,6 +82,7 @@ public class CreateSanitizerController implements Initializable {
 
     public void createObject()
     {
+        objectLabel.setTextFill(Color.BLACK);
         objectLabel.setText("");
         if (fieldsAreFull())
         {
