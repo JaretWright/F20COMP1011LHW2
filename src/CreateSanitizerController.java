@@ -28,9 +28,21 @@ public class CreateSanitizerController implements Initializable {
     @FXML
     private TextField priceTextField;
 
+    @FXML
+    private RadioButton plasticRadioButton;
+
+    @FXML
+    private RadioButton glassRadioButton;
+
+    private ToggleGroup materialToggleGroup;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //configure the RadioButton's
+        materialToggleGroup = new ToggleGroup();
+        glassRadioButton.setToggleGroup(materialToggleGroup);
+        plasticRadioButton.setToggleGroup(materialToggleGroup);
+        plasticRadioButton.setSelected(true);
 
         //configure the ComboBox
         brandComboBox.getItems().addAll("Koala Care","Early Start Safety","SQL Elixer");
@@ -42,20 +54,42 @@ public class CreateSanitizerController implements Initializable {
         volumeSpinner.setValueFactory(valueFactory);
         volumeSpinner.setEditable(true);
 
-        //try to capture the user input prior to commit
-        TextField editor = volumeSpinner.getEditor();
-        editor.textProperty().addListener((observable, ov, nv)->{
+//        SpinnerChangeListener scl = new SpinnerChangeListener();
+        TextField spinnerTextField = volumeSpinner.getEditor();
+        spinnerTextField.textProperty().addListener((observableValue,oldValue,newValue)->
+        {
             objectLabel.setText("");
-            try{
-                String text = editor.getText();
-                if (!text.isBlank())
-                    Integer.parseInt(editor.getText());
-            } catch (NumberFormatException e)
+            if (!newValue.isBlank())
             {
-                objectLabel.setTextFill(Color.RED);
-                objectLabel.setText("Volume must be a whole number.");
+                try {
+                    Integer.parseInt(newValue);
+                }catch (NumberFormatException e)
+                {
+                    spinnerTextField.setText(oldValue);
+                    objectLabel.setTextFill(Color.RED);
+                    objectLabel.setText("only whole numbers allowed for volume in ml");
+                }
             }
         });
+//        spinnerTextField.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observableValue,
+//                                String oldValue, String newValue) {
+//                objectLabel.setText("");
+//                if (!newValue.isBlank())
+//                {
+//                    try {
+//                        Integer.parseInt(newValue);
+//                    }catch (NumberFormatException e)
+//                    {
+//                        spinnerTextField.setText(oldValue);
+//                        objectLabel.setTextFill(Color.RED);
+//                        objectLabel.setText("only whole numbers allowed for volume in ml");
+//                    }
+//                }
+//            }
+//        });
+
 
         //configure the slider
         alcoholSlider.setMin(30);
