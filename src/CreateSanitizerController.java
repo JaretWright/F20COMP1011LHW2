@@ -35,14 +35,30 @@ public class CreateSanitizerController implements Initializable {
     private RadioButton glassRadioButton;
 
     private ToggleGroup materialToggleGroup;
+    private ToggleGroup ratingToggleGroup;
+
+    @FXML
+    private RadioButton oneStarRadioButton;
+
+    @FXML
+    private RadioButton twoStarRadioButton;
+
+    @FXML
+    private RadioButton threeStarRadioButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //configure the RadioButton's
+        //configure the material RadioButton's
         materialToggleGroup = new ToggleGroup();
         glassRadioButton.setToggleGroup(materialToggleGroup);
         plasticRadioButton.setToggleGroup(materialToggleGroup);
         plasticRadioButton.setSelected(true);
+
+        ratingToggleGroup = new ToggleGroup();
+        oneStarRadioButton.setToggleGroup(ratingToggleGroup);
+        twoStarRadioButton.setToggleGroup(ratingToggleGroup);
+        threeStarRadioButton.setToggleGroup(ratingToggleGroup);
+        threeStarRadioButton.setSelected(true);
 
         //configure the ComboBox
         brandComboBox.getItems().addAll("Koala Care","Early Start Safety","SQL Elixer");
