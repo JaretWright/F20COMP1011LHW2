@@ -113,11 +113,20 @@
                   </HBox>
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" onAction="#createObject" text="Create Object">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#createObject" text="Create Object">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#changeToGraphScene" text="See Bar Chart">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
             <Label fx:id="objectLabel" text="Label">
                <font>
                   <Font size="14.0" />
