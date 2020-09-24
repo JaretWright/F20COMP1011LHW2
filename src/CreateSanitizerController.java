@@ -186,11 +186,12 @@ public class CreateSanitizerController implements Initializable {
      * This method will change the scene to the GraphView
      */
     public void changeToGraphScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("barChartView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("High Temperatures");
-        stage.show();
+//        Parent root = FXMLLoader.load(getClass().getResource("barChartView.fxml"));
+//        Scene scene = new Scene(root);
+//        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        stage.setScene(scene);
+//        stage.setTitle("High Temperatures");
+//        stage.show();
+        SceneChanger.changeScene(event,"barChartView.fxml","High Temperatures");
     }
 }

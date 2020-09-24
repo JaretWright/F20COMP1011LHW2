@@ -10,15 +10,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BarChartController">
    <children>
-      <BarChart layoutX="62.0" prefHeight="348.0" prefWidth="456.0">
+      <BarChart fx:id="barChart" layoutX="62.0" prefHeight="348.0" prefWidth="456.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis fx:id="monthAxis" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="temperatureAxis" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button layoutX="492.0" layoutY="348.0" mnemonicParsing="false" text="Back">
+      <Button layoutX="492.0" layoutY="348.0" mnemonicParsing="false" onAction="#changeToSanitizerScene" text="Back">
          <font>
             <Font size="14.0" />
          </font>
